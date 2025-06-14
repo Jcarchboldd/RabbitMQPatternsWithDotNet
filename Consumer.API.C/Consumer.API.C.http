@@ -1,6 +1,6 @@
-@Consumer.API.C_HostAddress = http://localhost:5192
+@Consumer_API_C_HostAddress = http://localhost:5192
 
-GET {{Consumer.API.C_HostAddress}}/weatherforecast/
+GET {{Consumer_API_C_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
