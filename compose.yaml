@@ -1,0 +1,24 @@
+﻿services:
+  consumer.api.a:
+    image: consumer.api.a
+    build:
+      context: .
+      dockerfile: Consumer.API.A/Dockerfile
+
+  consumer.api.b:
+    image: consumer.api.b
+    build:
+      context: .
+      dockerfile: Consumer.API.B/Dockerfile
+
+  consumer.api.c:
+    image: consumer.api.c
+    build:
+      context: .
+      dockerfile: Consumer.API.C/Dockerfile
+
+  producer.api:
+    image: producer.api
+    build:
+      context: .
+      dockerfile: Producer.API/Dockerfile
