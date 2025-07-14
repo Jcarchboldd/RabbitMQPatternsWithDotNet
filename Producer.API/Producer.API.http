@@ -9,3 +9,14 @@ Content-Type: application/json
   "content": "Test fanout message from HTTP file"
 }
 
+### 📨 Send Direct Message
+POST http://localhost:5003/send/direct
+Content-Type: application/json
+
+{
+  "userName": "jane.doe",
+  "emailAddress": "jane@example.com",
+  "zipCode": "10117",
+  "content": "Test direct message from HTTP file"
+}
+
