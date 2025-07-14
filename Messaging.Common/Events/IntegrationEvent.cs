@@ -2,7 +2,15 @@ namespace Messaging.Common.Events;
 
 public record IntegrationEvent
 {
-    public Guid Id =>  Guid.NewGuid();
-    public DateTime OccuredOn => DateTime.UtcNow;
+    /// <summary>
+    /// Unique identifier for the event.
+    /// </summary>
+    public Guid Id { get; init; } = Guid.NewGuid();
+
+    /// <summary>
+    /// Time when the event occurred.
+    /// </summary>
+    public DateTime OccurredOn { get; init; } = DateTime.UtcNow;
+
     public string? EventName => GetType().AssemblyQualifiedName;
-};
+}
