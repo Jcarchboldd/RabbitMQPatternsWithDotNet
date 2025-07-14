@@ -2,7 +2,6 @@ using System.Reflection;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Messaging.Common.MassTransit;
 
@@ -28,9 +27,6 @@ public static class Extensions
                     host.Username(configuration["MessageBroker:UserName"] ?? string.Empty);
                     host.Password(configuration["MessageBroker:Password"] ?? string.Empty);
                 });
-
-                foreach (var busConfigurator in context.GetServices<IRabbitMqBusConfigurator>())
-                    busConfigurator.Configure(configurator, context);
 
                 configure?.Invoke(configurator, context);
 
