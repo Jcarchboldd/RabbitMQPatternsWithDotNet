@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMessageBroker(builder.Configuration, Assembly.GetExecutingAssembly());
+builder.Services.AddSingleton<IRabbitMqBusConfigurator, DirectExchangeBusConfigurator>();
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<ConsumeFanoutMessageHandler>();
 builder.Services.AddScoped<ConsumeDirectMessageHandler>();
