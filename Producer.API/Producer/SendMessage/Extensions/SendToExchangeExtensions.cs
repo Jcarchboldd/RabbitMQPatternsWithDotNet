@@ -5,6 +5,14 @@ namespace Producer.API.Producer.SendMessage.Extensions;
 
 public static class SendToExchangeExtensions
 {
+    private static Uri BuildExchangeUri<T>(string exchangeType, Dictionary<string, object> parameters)
+    {
+        var query = parameters.Count > 0
+            ? "&" + string.Join("&", parameters.Select(kvp => $"{kvp.Key}={kvp.Value}"))
+            : string.Empty;
+        return new Uri($"exchange:{typeof(T).Name}?type={exchangeType}{query}");
+    }
+
     public static async Task SendToDirectExchange<T>(
         this ISendEndpointProvider provider,
         T message,
@@ -12,7 +20,9 @@ public static class SendToExchangeExtensions
         ILogger logger,
         CancellationToken ct)
     {
-        var uri = new Uri($"exchange:{typeof(T).Name}?type=direct&routingKey={routingKey}");
+        var uri = BuildExchangeUri<T>(
+            "direct",
+            new Dictionary<string, object> { ["routingKey"] = routingKey });
         await SendToUri(provider, message, uri, logger, ct);
     }
 
@@ -23,7 +33,9 @@ public static class SendToExchangeExtensions
         ILogger logger,
         CancellationToken ct)
     {
-        var uri = new Uri($"exchange:{typeof(T).Name}?type=topic&routingKey={routingKey}");
+        var uri = BuildExchangeUri<T>(
+            "topic",
+            new Dictionary<string, object> { ["routingKey"] = routingKey });
         await SendToUri(provider, message, uri, logger, ct);
     }
 
@@ -34,8 +46,7 @@ public static class SendToExchangeExtensions
         ILogger logger,
         CancellationToken ct)
     {
-        var args = string.Join("&", headers.Select(kvp => $"{kvp.Key}={kvp.Value}"));
-        var uri = new Uri($"exchange:{typeof(T).Name}?type=headers&{args}");
+        var uri = BuildExchangeUri<T>("headers", headers);
         await SendToUri(provider, message, uri, logger, ct);
     }
 

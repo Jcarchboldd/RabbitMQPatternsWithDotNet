@@ -8,7 +8,7 @@ using Messaging.Common.MassTransit;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDirectExchangeFor<TestEvent>(
+builder.Services.AddTestEventMessageBroker(
     builder.Configuration,
     Assembly.GetExecutingAssembly());
 builder.Services.AddOpenApi();
