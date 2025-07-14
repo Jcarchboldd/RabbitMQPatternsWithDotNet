@@ -10,10 +10,14 @@ public class ConsumeDirectMessageDefinition : ConsumerDefinition<ConsumeDirectMe
         IConsumerConfigurator<ConsumeDirectMessageHandler> consumerConfigurator)
     {
         endpointConfigurator.ConfigureConsumeTopology = false;
-        endpointConfigurator.Bind<TestEvent>(x =>
+
+        if (endpointConfigurator is IRabbitMqReceiveEndpointConfigurator rmqConfigurator)
         {
-            x.ExchangeType = ExchangeType.Direct;
-            x.RoutingKey = "consumer.api.a";
-        });
+            rmqConfigurator.Bind<TestEvent>(x =>
+            {
+                x.ExchangeType = ExchangeType.Direct;
+                x.RoutingKey = "consumer.api.a";
+            });
+        }
     }
 }
