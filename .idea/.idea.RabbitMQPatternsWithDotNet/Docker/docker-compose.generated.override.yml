@@ -1,0 +1,78 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  consumer.api.a:
+    build:
+      context: "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet"
+      dockerfile: "Consumer.API.A/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/Consumer.API.A.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "consumer.api.a:dev"
+    ports: []
+    volumes:
+    - "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet/Consumer.API.A:/app:rw"
+    - "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet:/src:rw"
+    - "/Users/jairarchbold/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"
+  consumer.api.b:
+    build:
+      context: "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet"
+      dockerfile: "Consumer.API.B/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/Consumer.API.B.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "consumer.api.b:dev"
+    ports: []
+    volumes:
+    - "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet/Consumer.API.B:/app:rw"
+    - "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet:/src:rw"
+    - "/Users/jairarchbold/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"
+  consumer.api.c:
+    build:
+      context: "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet"
+      dockerfile: "Consumer.API.C/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/Consumer.API.C.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "consumer.api.c:dev"
+    ports: []
+    volumes:
+    - "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet/Consumer.API.C:/app:rw"
+    - "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet:/src:rw"
+    - "/Users/jairarchbold/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"
+  producer.api:
+    build:
+      context: "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet"
+      dockerfile: "Producer.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/Producer.API.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "producer.api:dev"
+    ports: []
+    volumes:
+    - "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet/Producer.API:/app:rw"
+    - "/Users/jairarchbold/RiderProjects/RabbitMQPatternsWithDotNet:/src:rw"
+    - "/Users/jairarchbold/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"

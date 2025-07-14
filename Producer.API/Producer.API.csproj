@@ -22,4 +22,11 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Producer\SendMessage\Direct\" />
+    <Folder Include="Producer\SendMessage\Headers\" />
+    <Folder Include="Producer\SendMessage\Mappers\" />
+    <Folder Include="Producer\SendMessage\Topic\" />
+  </ItemGroup>
+
 </Project>

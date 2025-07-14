@@ -1,4 +1,7 @@
 ﻿services:
+  message-broker:
+    image: rabbitmq:management
+    
   consumer.api.a:
     image: consumer.api.a
     build:
