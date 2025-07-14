@@ -6,6 +6,7 @@ namespace Consumer.API.A.Consumer.ConsumeMessage.Direct;
 public class ConsumeDirectMessageDefinition : ConsumerDefinition<ConsumeDirectMessageHandler>
 {
     protected override void ConfigureConsumer(
+        IReceiveEndpointBuilder builder,
         IReceiveEndpointConfigurator endpointConfigurator,
         IConsumerConfigurator<ConsumeDirectMessageHandler> consumerConfigurator)
     {
@@ -18,6 +19,11 @@ public class ConsumeDirectMessageDefinition : ConsumerDefinition<ConsumeDirectMe
                 x.ExchangeType = ExchangeType.Direct;
                 x.RoutingKey = "consumer.api.a";
             });
+        }
+
+        if (builder is IRabbitMqBusFactoryConfigurator busConfigurator)
+        {
+            busConfigurator.Publish<TestEvent>(x => x.ExchangeType = ExchangeType.Direct);
         }
     }
 }

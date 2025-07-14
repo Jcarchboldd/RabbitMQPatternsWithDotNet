@@ -7,8 +7,11 @@ namespace Messaging.Common.MassTransit;
 
 public static class Extensions
 {
-    public static IServiceCollection AddMessageBroker
-        (this IServiceCollection services, IConfiguration configuration, Assembly? assembly = null)
+    public static IServiceCollection AddMessageBroker(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        Assembly? assembly = null,
+        Action<IRabbitMqBusFactoryConfigurator, IBusRegistrationContext>? configure = null)
     {
         services.AddMassTransit(config =>
         {
@@ -24,6 +27,9 @@ public static class Extensions
                     host.Username(configuration["MessageBroker:UserName"] ?? string.Empty);
                     host.Password(configuration["MessageBroker:Password"] ?? string.Empty);
                 });
+
+                configure?.Invoke(configurator, context);
+
                 configurator.ConfigureEndpoints(context);
             });
         });
