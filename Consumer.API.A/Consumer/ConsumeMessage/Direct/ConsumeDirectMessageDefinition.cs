@@ -1,5 +1,6 @@
 using MassTransit;
 using Messaging.Common.Events;
+using Messaging.Common.Constants;
 using RabbitMQ.Client;
 
 namespace Consumer.API.A.Consumer.ConsumeMessage.Direct;
@@ -18,13 +19,8 @@ public class ConsumeDirectMessageDefinition : ConsumerDefinition<ConsumeDirectMe
             rabbitConfigurator.Bind<TestEvent>(x =>
             {
                 x.ExchangeType = ExchangeType.Direct;
-                x.RoutingKey = "consumer.api.a";
+                x.RoutingKey = RabbitMqRoutingKeys.ConsumerApiA;
             });
-        }
-
-        if (context is IRabbitMqBusFactoryConfigurator busConfigurator)
-        {
-            busConfigurator.Publish<TestEvent>(x => x.ExchangeType = ExchangeType.Direct);
         }
     }
 }

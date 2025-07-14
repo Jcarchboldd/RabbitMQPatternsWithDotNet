@@ -1,12 +1,16 @@
 using System.Reflection;
 using Consumer.API.A.Consumer.ConsumeMessage.Fanout;
 using Consumer.API.A.Consumer.ConsumeMessage.Direct;
+using Messaging.Common.Events;
+using RabbitMQ.Client;
 using Messaging.Common.MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddMessageBroker(builder.Configuration, Assembly.GetExecutingAssembly());
+builder.Services.AddDirectExchangeFor<TestEvent>(
+    builder.Configuration,
+    Assembly.GetExecutingAssembly());
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<ConsumeFanoutMessageHandler>();
 builder.Services.AddScoped<ConsumeDirectMessageHandler>();

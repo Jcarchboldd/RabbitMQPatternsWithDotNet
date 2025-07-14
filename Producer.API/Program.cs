@@ -3,13 +3,17 @@ using Carter;
 using Messaging.Common.MassTransit;
 using Producer.API.Producer.SendMessage.Fanout;
 using Producer.API.Producer.SendMessage.Direct;
+using Messaging.Common.Events;
+using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddCarter();
 builder.Services.AddOpenApi();
-builder.Services.AddMessageBroker(builder.Configuration, Assembly.GetExecutingAssembly());
+builder.Services.AddDirectExchangeFor<TestEvent>(
+    builder.Configuration,
+    Assembly.GetExecutingAssembly());
 
 builder.Services.AddScoped<SendFanoutMessageHandler>();
 builder.Services.AddScoped<SendDirectMessageHandler>();
