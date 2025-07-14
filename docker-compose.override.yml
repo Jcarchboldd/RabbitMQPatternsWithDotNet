@@ -6,7 +6,16 @@ services:
       - ASPNETCORE_HTTPS_PORTS=8081
     ports:
       - "6000:8080"
-      - "6060:8081" 
+      - "6060:8081"
+        
+  consumer.api.a:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "6001:8080"
+      - "6061:8081"
     
   message-broker:
     container_name: message-broker

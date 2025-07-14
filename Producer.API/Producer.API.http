@@ -3,9 +3,9 @@ POST http://localhost:5003/send/fanout
 Content-Type: application/json
 
 {
-  "userName": "john.doe",
-  "emailAddress": "john@example.com",
-  "zipCode": "10115",
+  "userName": "jose.doe",
+  "emailAddress": "jose@example.com",
+  "zipCode": "10117",
   "content": "Test fanout message from HTTP file"
 }
 
