@@ -1,5 +1,6 @@
 using System.Reflection;
 using Consumer.API.A.Consumer.ConsumeMessage.Fanout;
+using Consumer.API.A.Consumer.ConsumeMessage.Direct;
 using Messaging.Common.MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMessageBroker(builder.Configuration, Assembly.GetExecutingAssembly());
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<ConsumeFanoutMessageHandler>();
+builder.Services.AddScoped<ConsumeDirectMessageHandler>();
 
 var app = builder.Build();
 

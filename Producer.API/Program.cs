@@ -2,6 +2,7 @@ using System.Reflection;
 using Carter;
 using Messaging.Common.MassTransit;
 using Producer.API.Producer.SendMessage.Fanout;
+using Producer.API.Producer.SendMessage.Direct;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddMessageBroker(builder.Configuration, Assembly.GetExecutingAssembly());
 
 builder.Services.AddScoped<SendFanoutMessageHandler>();
+builder.Services.AddScoped<SendDirectMessageHandler>();
 
 var app = builder.Build();
 
