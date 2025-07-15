@@ -11,6 +11,11 @@ public class SendDirectMessageHandler(ISendEndpointProvider provider, ILogger<Se
 
     public async Task HandleAsync(TestEvent message, CancellationToken ct)
     {
-        await provider.SendToDirectExchange(message, RoutingKey, logger, ct);
+        await provider.SendToDirectExchange(
+            message,
+            RoutingKey,
+            logger,
+            ct,
+            RabbitMqExchangeNames.TestEventDirect);
     }
 }
