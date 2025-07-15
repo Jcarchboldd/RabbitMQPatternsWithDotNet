@@ -5,7 +5,7 @@ namespace Producer.API.Producer.SendMessage.Extensions;
 
 public static class SendToExchangeExtensions
 {
-    private static Uri BuildExchangeUri<T>(string exchangeType, Dictionary<string, object> parameters)
+    public static Uri BuildExchangeUri<T>(string exchangeType, Dictionary<string, object> parameters)
     {
         var query = parameters.Count > 0
             ? "&" + string.Join("&", parameters.Select(kvp => $"{kvp.Key}={kvp.Value}"))

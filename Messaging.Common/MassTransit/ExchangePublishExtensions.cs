@@ -8,7 +8,7 @@ namespace Messaging.Common.MassTransit;
 
 public static class ExchangePublishExtensions
 {
-    public static IServiceCollection AddMessageBrokerWithExchange<T>(
+    private static IServiceCollection AddMessageBrokerWithExchange<T>(
         this IServiceCollection services,
         IConfiguration configuration,
         string exchangeType,

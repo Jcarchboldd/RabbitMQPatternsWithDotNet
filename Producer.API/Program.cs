@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCarter();
 builder.Services.AddOpenApi();
-builder.Services.AddTestEventMessageBroker(
+builder.Services.AddMessageBroker(
     builder.Configuration,
     Assembly.GetExecutingAssembly());
 
