@@ -5,12 +5,12 @@ namespace Producer.API.Producer.SendMessage.Extensions;
 
 public static class SendToExchangeExtensions
 {
-    public static Uri BuildExchangeUri<T>(string exchangeType, Dictionary<string, object> parameters, string? exchangeName = null)
+    public static Uri BuildExchangeUri<T>(string exchangeType, Dictionary<string, object> parameters)
     {
         var query = parameters.Count > 0
             ? "&" + string.Join("&", parameters.Select(kvp => $"{kvp.Key}={kvp.Value}"))
             : string.Empty;
-        return new Uri($"exchange:{exchangeName ?? typeof(T).Name}?type={exchangeType}{query}");
+        return new Uri($"exchange:{typeof(T).Name}?type={exchangeType}{query}");
     }
 
     public static async Task SendToDirectExchange<T>(
@@ -18,13 +18,11 @@ public static class SendToExchangeExtensions
         T message,
         string routingKey,
         ILogger logger,
-        CancellationToken ct,
-        string? exchangeName = null)
+        CancellationToken ct)
     {
         var uri = BuildExchangeUri<T>(
             "direct",
-            new Dictionary<string, object> { ["routingKey"] = routingKey },
-            exchangeName);
+            new Dictionary<string, object> { ["routingKey"] = routingKey });
         await SendToUri(provider, message, uri, logger, ct);
     }
 
@@ -33,13 +31,11 @@ public static class SendToExchangeExtensions
         T message,
         string routingKey,
         ILogger logger,
-        CancellationToken ct,
-        string? exchangeName = null)
+        CancellationToken ct)
     {
         var uri = BuildExchangeUri<T>(
             "topic",
-            new Dictionary<string, object> { ["routingKey"] = routingKey },
-            exchangeName);
+            new Dictionary<string, object> { ["routingKey"] = routingKey });
         await SendToUri(provider, message, uri, logger, ct);
     }
 
@@ -48,10 +44,9 @@ public static class SendToExchangeExtensions
         T message,
         Dictionary<string, object> headers,
         ILogger logger,
-        CancellationToken ct,
-        string? exchangeName = null)
+        CancellationToken ct)
     {
-        var uri = BuildExchangeUri<T>("headers", headers, exchangeName);
+        var uri = BuildExchangeUri<T>("headers", headers);
         await SendToUri(provider, message, uri, logger, ct);
     }
 

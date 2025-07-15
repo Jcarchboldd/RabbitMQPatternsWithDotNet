@@ -16,13 +16,11 @@ public class ConsumeDirectMessageDefinition : ConsumerDefinition<ConsumeDirectMe
 
         if (endpointConfigurator is IRabbitMqReceiveEndpointConfigurator rabbitConfigurator)
         {
-            rabbitConfigurator.Bind(
-                RabbitMqExchangeNames.TestEventDirect,
-                x =>
-                {
-                    x.ExchangeType = ExchangeType.Direct;
-                    x.RoutingKey = RabbitMqRoutingKeys.ConsumerApiA;
-                });
+            rabbitConfigurator.Bind<TestEvent>(x =>
+            {
+                x.ExchangeType = ExchangeType.Direct;
+                x.RoutingKey = RabbitMqRoutingKeys.ConsumerApiA;
+            });
         }
     }
 }
